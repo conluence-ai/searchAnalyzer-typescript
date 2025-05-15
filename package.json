@@ -10,12 +10,15 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/pg": "^8.15.1",
     "spacy-js": "^0.0.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "compromise": "^14.14.4",
-    "natural": "^8.0.1"
+    "dotenv": "^16.5.0",
+    "natural": "^8.0.1",
+    "pg": "^8.16.0"
   }
 }

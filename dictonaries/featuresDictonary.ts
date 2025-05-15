@@ -2664,6 +2664,7 @@ export const  featureDictionary =
         "rounded–back"
     ]
 },
+// sofa with rounded back
 {
       feature: "Dual Tone",
     synonyms: [

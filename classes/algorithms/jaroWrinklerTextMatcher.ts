@@ -3,7 +3,7 @@ import TextMatcher from "../textMatcher";
 import * as natural from "natural";
 
 class JaroWrinklerMatcher extends TextMatcher{
-    private readonly SIMILARITY_THRESHOLD = 0.8;
+    private readonly SIMILARITY_THRESHOLD = 0.9;
 
     findMatch(word: string, terms: string[], canonicalMap: Map<string, string>): MatchResult | null {
          let bestMatch = ''

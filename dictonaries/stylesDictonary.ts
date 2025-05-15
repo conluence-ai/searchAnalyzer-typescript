@@ -13,8 +13,7 @@ export const styleDictionary = [
         "rural",
         "woodland",
         "barnyard",
-        "cabin",
-        "log"
+        "cabin"
       ]
     },
     {
@@ -174,7 +173,6 @@ export const styleDictionary = [
         "urban loft",
         "raw",
         "mechanical",
-        "metallic"
       ]
     }
   ];
