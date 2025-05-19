@@ -1930,7 +1930,10 @@ export const  featureDictionary =
         "arm-free design",
         "armless profile",
         "no-side supports",
+        "don't have arms",
+        "no arm support",
         "without arms",
+        "no arms",
         "arm-void",
         "armrest-less",
         "sans armrests"
@@ -3904,6 +3907,31 @@ export const  featureDictionary =
         "externallbackquilted",
         "external back-quilted"
     ]
+},
+{
+     feature  : "Straight",
+     synonyms: [
+        "linear",
+        "unbending",    
+        "straight back",
+        "straight-edged",
+        "straightforward",
+        "unwavering",
+        "unbending",
+        "uncurved",
+        "unbending",
+     ],
+        spelling_variations: [
+            "straight ",
+            "strait",
+            "straigh",
+            "stright",
+            "straigh t",
+            "straightt",
+            "straighht",
+            "stight",
+            "straght"
+        ]
 },
 {
       feature: "WithMovableHeadrest",

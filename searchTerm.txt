@@ -1,0 +1,62 @@
+arm chairs by 101 copenhagan with industrial look, flat arm and fabric
+baxter chaise lounge with round shape and contemporary look
+modern industrial sofa with stainless steel legs and straight arms
+victorian era armchair with mouldings, velvet fabric and high back design
+pebble looking thing by tacchini
+sofa with mid century style and wooden sleek arms
+swivel base armchair with curved back
+pillow low ht arm sofa
+sofa with convertable bed 
+tubular arm sofa with brass finish base
+sled gold finish base sofa
+exposed metal frame structure 
+curved low ht sofa
+modular base corner sofa with upholstered base and wooden straight legs
+nature design plaatform base sofa
+//  "armchairs by 101 copenhagan with industrial look, flat arm and fabric",
+// "baxter chise lounge with round shape and contemporary look",
+// "modern industrial sofa with stainless steel legs and straight arms",
+// "victorian era armchair with mouldings, velvet fabric and high back design",
+// "pebble looking thing by tacchini",
+// "sofa with mid century style and wooden sleek arms",
+// "swivel base armchair with curved back",
+// "pillow low ht arm sofa",
+// "sofa with convertable bed ",
+// "tubular arm sofa with brass finish base",
+// "sled gold finish base sofa",
+// "exposed metal frame structure ",
+// "curved low ht sofa",
+// "modular base corner sofa with upholstered base and wooden straight legs",
+// "nature design plaatform base sofa",
+// "Mid-century modern sofa with tapered walnut legs and orange velvet upholstery",
+// 'Scandinavian armchair with light oak legs and bouclé fabric',
+// "Art Deco coffee table with mirrored glass top and brass inlays",
+// "Bohemian floor cushion with tassels and embroidered patternss",
+// "Industrial bar stool with blackened steel frame and tractor seat",
+// "Tacchini pebble-shaped pouf in moss green",
+// "Convertable sleeper sofa with storage drawers and USB ports",
+// "Curved sectional with chaise longue and velvet upholstry",
+// "Moduler shelving unit with oak veneer and black metal brackets",
+// "Low-back loveseat with tufted cusion and brass legs",
+// "Round marble coffe tabel with gold accents",
+// "Soft thing for reading nook by Muuto",
+// "Retro-looking lamp with adjustable arms and brushed finish",
+// "Eco-friendly bamboo daybed with organic cotton cushions",
+// "Minimalist wall-mounted desk foldable for small spaces",
+// 'Exposed-beam console table rustic farmhouse style',
+"Kamodo",
+"Velis",
+"sfao with low back and high arms with contemporary look",
+"sofa by minoti",
+"i want sofa with long arms",
+"spring sofa",
+"sofa which lots of cushions",
+"armchair with metal legs",
+"sofa with fabric design",
+"leather armchair without armrest",
+"sofa with no arms",
+"sofa which don't have arms",
+"armchair which have headrest",
+"sofa with sinous back",
+"armchairs with sinous back",
+"armchiiar with castor wheels"

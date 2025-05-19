@@ -71,6 +71,7 @@ class FurnitureAnalyzer {
             console.log("Words:", words);
         }
 
+        // Look for multi-word product types first
         for (let n = 4; n >= 1; n--) {
             for (let i = 0; i <= words.length - n; i++) {
                 const phrase = words.slice(i, i + n).join(' ');
@@ -98,6 +99,7 @@ class FurnitureAnalyzer {
             }
         }
 
+        // Try fuzzy matching for each word
         const potentialMatches: MatchResult[] = [];
 
         for (let i = 0; i < words.length; i++) {
@@ -160,6 +162,8 @@ class FurnitureAnalyzer {
         
         if (this.debugMode) {
             console.log("Analyzing text for brands:", text);
+            console.log("Words:", words);
+            console.log("Available brand terms:", allTerms);
         }
         
         // Check for multi-word brand names first (longer phrases have priority)
@@ -193,6 +197,38 @@ class FurnitureAnalyzer {
             }
         }
         
+
+        for (let i = 0; i < words.length; i++) {
+            const word = words[i];
+            
+      
+            if (/^\d+$/.test(word)) {
+    
+                if (allTerms.includes(word)) {
+                    const canonical = canonicalMap.get(word) || word;
+                    const remainingWords = [...words];
+                    remainingWords.splice(i, 1);
+                    
+                    if (this.debugMode) {
+                        console.log(`Found numeric brand: "${word}" => "${canonical}"`);
+                    }
+                    
+                    return {
+                        brandName: canonical,
+                        matchDetails: {
+                            word: word,
+                            match: word,
+                            canonicalForm: canonical,
+                            algorithm: "Exact",
+                            score: 1.0,
+                            position: i
+                        },
+                        remainingText: remainingWords.join(' ')
+                    };
+                }
+            }
+        }
+        
         const potentialMatches: MatchResult[] = [];
         
         for (let i = 0; i < words.length; i++) {
@@ -217,7 +253,6 @@ class FurnitureAnalyzer {
                 console.log(`[Best Brand Match] "${bestMatch.word}" => "${bestMatch.canonicalForm}" (${bestMatch.algorithm}, score: ${bestMatch.score.toFixed(3)})`);
             }
             
-            // Create remaining text
             const remainingWords = [...words];
             const position = bestMatch.position !== undefined ? bestMatch.position : -1;
             
@@ -240,7 +275,6 @@ class FurnitureAnalyzer {
         
         return { brandName: null, remainingText: text };
     }
-
     private extractProductName(text: string): { productName: string | null, matchDetails?: MatchResult, remainingText: string } {
         const productDict = this.dictionaries.get('ProductName');
         if (!productDict) {
@@ -260,7 +294,7 @@ class FurnitureAnalyzer {
           console.log("Words:", words);
         }
         
-        // First try exact multi-word matches (longer phrases have priority)
+   
         for (let n = 4; n >= 1; n--) {
           for (let i = 0; i <= words.length - n; i++) {
             let alreadyMatched = false;
@@ -427,6 +461,7 @@ class FurnitureAnalyzer {
 
         const exactMatches: MatchResult[] = [];
         
+        // First, try to find exact matches for multi-word features
         for (let n = 12; n >= 1; n--) {
             for (let i = 0; i <= words.length - n; i++) {
                 let alreadyMatched = false;
@@ -450,7 +485,6 @@ class FurnitureAnalyzer {
                     match.position = i;
                     match.length = n;
                     exactMatches.push(match);
-                    
                     
                     for (let j = i; j < i + n; j++) {
                         removedIndices.add(j);
@@ -609,41 +643,73 @@ class FurnitureAnalyzer {
             console.log("Starting analysis with text:", text);
         }
 
-        const productTypeResult = this.extractProductType(text);
-        let currentText = productTypeResult.remainingText;
+        // Copy the original text for multiple extraction passes
+        let currentText = text;
         
-        // Move brand extraction earlier in the process
+        // First pass: Extract brand name
         const brandResult = this.extractBrandName(currentText);
         currentText = brandResult.remainingText;
-
         
-        const stylesResult = this.extractStyles(currentText);
-        currentText = stylesResult.remainingText;
+        // Second pass: Extract product type
+        const productTypeResult = this.extractProductType(currentText);
+        currentText = productTypeResult.remainingText;
         
-        const placesResult = this.extractDictionaryItems(currentText, 'Place', 5);
-        currentText = placesResult.remainingText;
-        
+        // Third pass: Extract features
         const featuresResult = this.extractFeatures(currentText);
         currentText = featuresResult.remainingText;
         
+        // Fourth pass: Extract styles
+        const stylesResult = this.extractStyles(currentText);
+        currentText = stylesResult.remainingText;
+        
+        // Fifth pass: Extract places
+        const placesResult = this.extractDictionaryItems(currentText, 'Place', 5);
+        currentText = placesResult.remainingText;
+        
+        // Last pass: Extract product name
         const productNameResult = this.extractProductName(currentText);
         
-        const result: AnalysisResult = {
-            places: placesResult.items,
-            styles: stylesResult.styles,
-            productType: productTypeResult.productType,
-            features: featuresResult.features,
-            brandName: brandResult.brandName,
+        // Now do the same passes but in the opposite order 
+        // to catch items that might have been missed due to order dependency
+        currentText = text;
+        
+        // Second pass in reverse: Extract places
+        const placesResult2 = this.extractDictionaryItems(currentText, 'Place', 5);
+        currentText = placesResult2.remainingText;
+        
+        // Extract styles in reverse order
+        const stylesResult2 = this.extractStyles(currentText);
+        currentText = stylesResult2.remainingText;
+        
+        // Extract features in reverse order
+        const featuresResult2 = this.extractFeatures(currentText);
+        currentText = featuresResult2.remainingText;
+         
+        // Extract product type in reverse order
+        const productTypeResult2 = this.extractProductType(currentText);
+        currentText = productTypeResult2.remainingText;
+        
+        // Extract brand name in reverse order
+        const brandResult2 = this.extractBrandName(currentText);
+        
+        // Combine results from both directions
+        const combinedResult: AnalysisResult = {
+            places: [...new Set([...placesResult.items, ...placesResult2.items])],
+            styles: [...new Set([...stylesResult.styles, ...stylesResult2.styles])],
+            features: [...new Set([...featuresResult.features, ...featuresResult2.features])],
+            productType: productTypeResult.productType || productTypeResult2.productType,
+            brandName: brandResult.brandName || brandResult2.brandName,
             productName: productNameResult.productName,
             originalText: text,
-            confidence: this.calculateConfidenceForAnalysis(text, brandResult.brandName !== null)
+            confidence: this.calculateConfidenceForAnalysis(text, 
+                brandResult.brandName !== null || brandResult2.brandName !== null)
         };
 
         if (this.debugMode && productTypeResult.matchDetails) {
-            result.matchDetails = productTypeResult.matchDetails;
+            combinedResult.matchDetails = productTypeResult.matchDetails;
         }
 
-        return result;
+        return combinedResult;
     }
 
     private calculateConfidenceForAnalysis(text: string, hasBrand: boolean): number {
