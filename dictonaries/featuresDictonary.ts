@@ -1430,8 +1430,8 @@ export const  featureDictionary =
         "serpentine",
         "flowing",
         "meandering",
-        "ribbon-like",
-        "s-shaped",
+        "ribbon like",
+        "s shaped",
         "sweeping",
         "gracefully curved"
     ],
@@ -3637,6 +3637,7 @@ export const  featureDictionary =
         "back segmentation",
         "bisected back",
         "back cleft",
+        "split back sofa",
         "back division",
         "split-panel back",
         "back bifurcation",

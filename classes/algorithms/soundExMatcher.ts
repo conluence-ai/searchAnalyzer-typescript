@@ -12,7 +12,8 @@ class SoundExMatcher extends TextMatcher{
             const wordSoundex = this.soundEx.process(word);
 
 
-            if (this.debugMode) {
+            if (this.debugMode) 
+        {
                 console.log(`[SoundEx] "${word}" soundex: ${wordSoundex}`);
               }
 

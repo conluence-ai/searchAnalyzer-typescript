@@ -44,11 +44,11 @@ async function initializeSystem() {
               ProductName : productNameDict
           },
 
-          debug : false
+          debug : true
       })
 
       
-      
+      // console.log(analyzer.getTrieStats());
       
   //     if(process.env.NODE_ENV == 'dev'){
   //     const samples = [];
